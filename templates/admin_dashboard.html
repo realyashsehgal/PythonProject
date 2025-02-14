@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}">
+    <title>Title</title>
+</head>
+<body>
+            <form action="Job_Adding" method="POST">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required><br><br>
+
+                <label for="description">Description:</label>
+                <input type="text" id="description" name="description" required><br><br>
+
+                <label for="skills">Skills:</label>
+                <input type="text" id="skills" name="skills" required><br><br>
+
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required><br><br>
+
+                <label for="link">Job link:</label>
+                <input type="text" id="link" name="link" required><br><br>
+
+
+                <button type="submit">Add</button>
+            </form>
+</body>
+</html>
