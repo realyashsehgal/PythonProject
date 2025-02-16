@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect, url_for
 from Config import Config
 from DbManager import add_jobs
+from utils.ResumeParser import pdf_reading, clean_resume_text
+from utils.JobMatcher import job_match
 import os
 
 
@@ -53,17 +55,18 @@ def home():
 
 @app.route('/upload_resume', methods=['POST'])
 def upload_resume():
-    print("i ran")
     if 'file' not in request.files:
-        print("Debug: File not found ")
         return redirect(request.url)
     file = request.files['file']
     if file:
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(filepath)
-        return "File uploaded successfully!"
-    print("Mil gayi")
-    return render_template('results.html')
+        text = pdf_reading(filepath)
+        text = clean_resume_text(text)
+        matching_job = job_match(text)
+        print(matching_job)
+        return render_template('results.html',jobs = matching_job)
+    return redirect(url_for('home'))
 
 @app.route('/results')
 def results():

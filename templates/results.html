@@ -5,6 +5,21 @@
     <title>Title</title>
 </head>
 <body>
+    <h1>Jobs Matching Your Resume</h1>
+
+    {% if jobs %}
+        <ul>
+            {% for job in jobs %}
+                <li>
+                    <h3>{{ job.title }}</h3>
+                    <p>{{ job.description }}</p>
+                    <a href="{{ job.link }}" target="_blank">Apply Here</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No matching jobs found.</p>
+    {% endif %}
 
 </body>
 </html>
